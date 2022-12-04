@@ -16,8 +16,6 @@ func score_part1(opponent byte, you byte) int {
 			return 2 + 6
 		case 'Z':
 			return 3 + 0
-		default:
-			panic(fmt.Errorf("bad you: %v", you))
 		}
 	case 'B': // paper
 		switch you {
@@ -27,8 +25,6 @@ func score_part1(opponent byte, you byte) int {
 			return 2 + 3
 		case 'Z':
 			return 3 + 6
-		default:
-			panic(fmt.Errorf("bad you: %v", you))
 		}
 	case 'C': // scissors
 		switch you {
@@ -38,12 +34,10 @@ func score_part1(opponent byte, you byte) int {
 			return 2 + 0
 		case 'Z':
 			return 3 + 3
-		default:
-			panic(fmt.Errorf("bad you: %v", you))
 		}
-	default:
-		panic(fmt.Errorf("bad opponent: %v", opponent))
 	}
+
+	panic(fmt.Errorf("bad line: %v %v", opponent, you))
 }
 
 func score_part2(opponent byte, outcome byte) int {
@@ -56,8 +50,6 @@ func score_part2(opponent byte, outcome byte) int {
 			return 1 + 3
 		case 'Z': // win
 			return 2 + 6
-		default:
-			panic(fmt.Errorf("bad outcome: %v", outcome))
 		}
 	case 'B': // paper
 		switch outcome {
@@ -67,8 +59,6 @@ func score_part2(opponent byte, outcome byte) int {
 			return 2 + 3
 		case 'Z': // win
 			return 3 + 6
-		default:
-			panic(fmt.Errorf("bad outcome: %v", outcome))
 		}
 	case 'C': // scissors
 		switch outcome {
@@ -78,12 +68,9 @@ func score_part2(opponent byte, outcome byte) int {
 			return 3 + 3
 		case 'Z': // win
 			return 1 + 6
-		default:
-			panic(fmt.Errorf("bad outcome: %v", outcome))
 		}
-	default:
-		panic(fmt.Errorf("bad opponent: %v", opponent))
 	}
+	panic(fmt.Errorf("bad line: %v %v", opponent, outcome))
 }
 
 func main() {

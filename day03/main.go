@@ -59,14 +59,12 @@ func main() {
 			sum += duplicatePriority(line)
 		})
 	} else {
-		count := 0
-		group := make([]string, 3)
+		group := make([]string, 0)
 		helpers.ReadStdin(func(line string) {
-			group[count] = line
-			count += 1
-			if count == 3 {
+			group = append(group, line)
+			if len(group) == 3 {
 				sum += commonPriority(group[0], group[1], group[2])
-				count = 0
+				group = group[:0]
 			}
 		})
 	}
