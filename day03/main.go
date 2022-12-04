@@ -15,40 +15,28 @@ func priority(item rune) int {
 	panic(fmt.Errorf("bad item: %v", item))
 }
 
-func duplicatePriority(contents string) int {
-	firstCompartment := make(map[int]int)
-	half := len(contents) / 2
-	for index, item := range contents {
-		p := priority(item)
-		if index < half {
-			firstCompartment[p] = p
+func commonRune(strings []string) rune {
+	seen := make(map[rune]int)
+	for index, s := range strings {
+		if index == 0 {
+			for _, r := range s {
+				seen[r] = index
+			}
+		} else if index+1 < len(strings) {
+			for _, r := range s {
+				if lastIndex, found := seen[r]; found && lastIndex+1 == index {
+					seen[r] = index
+				}
+			}
 		} else {
-			if _, found := firstCompartment[p]; found {
-				return p
+			for _, r := range s {
+				if lastIndex, found := seen[r]; found && lastIndex+1 == index {
+					return r
+				}
 			}
 		}
 	}
-	return 0
-}
-
-func commonPriority(c0, c1, c2 string) int {
-	common := make(map[rune]int)
-
-	for _, item := range c0 {
-		common[item] = 0
-	}
-	for _, item := range c1 {
-		if _, found := common[item]; found {
-			common[item] = 1
-		}
-	}
-	for _, item := range c2 {
-		if value, found := common[item]; found && value == 1 {
-			return priority(item)
-		}
-	}
-
-	return 0
+	panic(fmt.Errorf("no common runes"))
 }
 
 func main() {
@@ -56,14 +44,14 @@ func main() {
 
 	if helpers.Part1() {
 		helpers.ReadStdin(func(line string) {
-			sum += duplicatePriority(line)
+			sum += priority(commonRune([]string{line[:len(line)/2], line[len(line)/2:]}))
 		})
 	} else {
 		group := make([]string, 0)
 		helpers.ReadStdin(func(line string) {
 			group = append(group, line)
 			if len(group) == 3 {
-				sum += commonPriority(group[0], group[1], group[2])
+				sum += priority(commonRune(group))
 				group = group[:0]
 			}
 		})

@@ -7,7 +7,7 @@ import (
 	"github.com/flopp/aoc2022/helpers"
 )
 
-func inRange(from, to, candidate int) bool {
+func between(from, to, candidate int) bool {
 	return from <= candidate && candidate <= to
 }
 
@@ -22,11 +22,11 @@ func main() {
 		t1 := helpers.MustParseInt(match[4])
 
 		if helpers.Part1() {
-			if (inRange(f0, t0, f1) && inRange(f0, t0, t1)) || (inRange(f1, t1, f0) && inRange(f1, t1, t0)) {
+			if (between(f0, t0, f1) && between(f0, t0, t1)) || (between(f1, t1, f0) && between(f1, t1, t0)) {
 				countOverlaps += 1
 			}
 		} else {
-			if inRange(f0, t0, f1) || inRange(f0, t0, t1) || inRange(f1, t1, f0) || inRange(f1, t1, t0) {
+			if between(f0, t0, f1) || between(f0, t0, t1) || between(f1, t1, f0) || between(f1, t1, t0) {
 				countOverlaps += 1
 			}
 		}
