@@ -64,6 +64,13 @@ format:
 	@echo "expected: 70"
 	$(run2)
 
+.PHONY: 04
+04:
+	@echo "expected: 2"
+	$(run1)
+	@echo "expected: 4"
+	$(run2)
+
 .PHONY: ??
 ??:
 	@echo "expected: ?"
