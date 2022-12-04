@@ -1,4 +1,4 @@
-My solutions for Advent of Code 2022 in go.
+My solutions for [Advent of Code 2022](https://adventofcode.com/2022) in [go](https://go.dev/).
 
 The solution and input data (i.e. my custom input data) for day XX is contained in the subdirectory `dayXX`.
 To run the solution for day `XX`, just type
