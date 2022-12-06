@@ -82,6 +82,13 @@ format:
 	@echo "expected: MCD"
 	$(run2)
 
+.PHONY: 06
+06:
+	@echo "expected: 7, 5, 6, 10, 11"
+	$(run1)
+	@echo "expected: 19, 23, 23, 29, 26"
+	$(run2)
+
 .PHONY: ??
 ??:
 	@echo "expected: ?"
