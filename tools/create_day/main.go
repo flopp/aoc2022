@@ -25,6 +25,27 @@ func copy(src, dst string) error {
 	return err
 }
 
+func patchMakefile(fileName, day string) {
+	f, err := os.OpenFile(fileName, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+
+	text := fmt.Sprintf(`
+.PHONY: %s
+%s:
+	@echo "expected: ?"
+	$(run1)
+	@echo "expected: ?"
+	$(run2)
+`, day, day)
+
+	if _, err = f.WriteString(text); err != nil {
+		panic(err)
+	}
+}
+
 func main() {
 	if len(os.Args) != 2 {
 		panic(fmt.Errorf("USAGE: create_day XX"))
@@ -53,4 +74,6 @@ func main() {
 	if err := copy("template/puzzle.txt", fmt.Sprintf("%s/puzzle.txt", dayDir)); err != nil {
 		panic(err)
 	}
+
+	patchMakefile("Makefile", day)
 }

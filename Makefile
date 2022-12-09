@@ -103,9 +103,13 @@ format:
 	@echo "expected: 16 (not directly given in puzzle description)"
 	$(run2)
 
-.PHONY: ??
-??:
-	@echo "expected: ?"
+.PHONY: 09
+09:
+	@echo "expected: 13"
 	$(run1)
-	@echo "expected: ?"
-	$(run2)
+	@echo "expected: 1"
+	@go run day09/main.go part2 < day09/test.txt
+	@echo "expected: 36"
+	@go run day09/main.go part2 < day09/test2.txt
+	@echo "=>"
+	@go run day09/main.go part2 < day09/puzzle.txt
