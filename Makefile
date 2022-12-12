@@ -127,3 +127,10 @@ format:
 	$(run1)
 	@echo "expected: 2713310158"
 	$(run2)
+
+.PHONY: 12
+12:
+	@echo "expected: 31"
+	$(run1)
+	@echo "expected: 29"
+	$(run2)
