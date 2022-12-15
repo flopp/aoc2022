@@ -1,14 +1,14 @@
 define run1
-	@go run day$@/main.go part1 < day$@/test.txt
+	@go run day$@/main.go part1 test < day$@/test.txt
 	@echo "=>"
-	@go run day$@/main.go part1 < day$@/puzzle.txt
+	@go run day$@/main.go part1 puzzle < day$@/puzzle.txt
 	@echo
 endef
 
 define run2
-	@go run day$@/main.go part2 < day$@/test.txt
+	@go run day$@/main.go part2 test < day$@/test.txt
 	@echo "=>"
-	@go run day$@/main.go part2 < day$@/puzzle.txt
+	@go run day$@/main.go part2 puzzle < day$@/puzzle.txt
 	@echo
 endef
 
@@ -147,4 +147,11 @@ format:
 	@echo "expected: 24"
 	$(run1)
 	@echo "expected: 93"
+	$(run2)
+
+.PHONY: 15
+15:
+	@echo "expected: 26"
+	$(run1)
+	@echo "expected: 56000011"
 	$(run2)
