@@ -155,3 +155,10 @@ format:
 	$(run1)
 	@echo "expected: 56000011"
 	$(run2)
+
+.PHONY: 16
+16:
+	@echo "expected: 1651"
+	$(run1)
+	@echo "expected: 1707"
+	$(run2)
