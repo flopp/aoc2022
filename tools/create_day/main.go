@@ -51,10 +51,11 @@ func main() {
 		panic(fmt.Errorf("USAGE: create_day XX"))
 	}
 
-	day := os.Args[1]
-	if !regexp.MustCompile(`^\d\d$`).MatchString(day) {
+	match := regexp.MustCompile(`^day(\d\d)$`).FindStringSubmatch(os.Args[1])
+	if match == nil {
 		panic(fmt.Errorf("USAGE: create_day XX"))
 	}
+	day := match[1]
 
 	dayDir := fmt.Sprintf("day%s", day)
 	if _, err := os.Stat(dayDir); !os.IsNotExist(err) {

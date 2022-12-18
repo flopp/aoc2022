@@ -12,40 +12,12 @@ define run2
 	@echo
 endef
 
-.PHONY: create
-create:
-	@go run tools/create_day/main.go ${DAY}
+all:
+	@echo "Run 'make dayXX' to create a template directory for day XX"
+	@echo "Run 'make XX' to run the test and puzzle inputs on the day XX solution"
 
-.PHONY: all
-all: 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24
-
-.PHONY: format
-format:
-	go fmt helpers/*.go
-	go fmt day01/main.go
-	go fmt day02/main.go
-	go fmt day03/main.go
-	go fmt day04/main.go
-	go fmt day05/main.go
-	go fmt day06/main.go
-	go fmt day07/main.go
-	go fmt day08/main.go
-	go fmt day09/main.go
-	go fmt day10/main.go
-	go fmt day11/main.go
-	go fmt day12/main.go
-	go fmt day13/main.go
-	go fmt day14/main.go
-	go fmt day15/main.go
-	go fmt day16/main.go
-	go fmt day17/main.go
-	go fmt day18/main.go
-	go fmt day19/main.go
-	go fmt day20/main.go
-	go fmt day21/main.go
-	go fmt day22/main.go
-	go fmt day23/main.go
-	go fmt day24/main.go
+day%:
+	@go run tools/create_day/main.go $@
 
 .PHONY: 01
 01:
@@ -161,4 +133,18 @@ format:
 	@echo "expected: 1651"
 	$(run1)
 	@echo "expected: 1707"
+	$(run2)
+
+.PHONY: 17
+17:
+	@echo "expected: 3068"
+	$(run1)
+	@echo "expected: ?"
+	$(run2)
+
+.PHONY: 18
+18:
+	@echo "expected: 64"
+	$(run1)
+	@echo "expected: 58"
 	$(run2)
