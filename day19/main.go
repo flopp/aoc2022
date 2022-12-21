@@ -176,10 +176,10 @@ func main() {
 		if match := reBlueprint.FindStringSubmatch(line); match != nil {
 			blueprint := createBlueprint(
 				helpers.MustParseInt64(match[1]),
-				int64(helpers.MustParseInt(match[2])),
-				int64(helpers.MustParseInt(match[3])),
-				int64(helpers.MustParseInt(match[4])), int64(helpers.MustParseInt(match[5])),
-				int64(helpers.MustParseInt(match[6])), int64(helpers.MustParseInt(match[7])),
+				helpers.MustParseInt64(match[2]),
+				helpers.MustParseInt64(match[3]),
+				helpers.MustParseInt64(match[4]), helpers.MustParseInt64(match[5]),
+				helpers.MustParseInt64(match[6]), helpers.MustParseInt64(match[7]),
 			)
 			blueprints = append(blueprints, blueprint)
 		} else {
@@ -200,7 +200,6 @@ func main() {
 		fmt.Println(sum)
 	} else {
 		m := int64(1)
-
 		for i, bp := range blueprints {
 			if i >= 3 {
 				break
