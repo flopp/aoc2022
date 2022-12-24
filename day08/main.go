@@ -146,10 +146,7 @@ func main() {
 		maxScenicScore := 0
 		for y := 0; y < height; y += 1 {
 			for x := 0; x < width; x += 1 {
-				s := scenicScore(grid, x, y)
-				if s > maxScenicScore {
-					maxScenicScore = s
-				}
+				maxScenicScore = helpers.Max(maxScenicScore, scenicScore(grid, x, y))
 			}
 		}
 		fmt.Println(maxScenicScore)

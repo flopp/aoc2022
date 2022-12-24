@@ -8,41 +8,23 @@ import (
 )
 
 type Blueprint struct {
-	index                                       int64
-	c0min                                       int64
-	c00, c01, c02, c03                          int64
-	cp2, cp3                                    int64
-	max_needed_r0, max_needed_r1, max_needed_r2 int64
+	index                                       int
+	c0min                                       int
+	c00, c01, c02, c03                          int
+	cp2, cp3                                    int
+	max_needed_r0, max_needed_r1, max_needed_r2 int
 }
 
 var (
-	bp_c0min                       int64
-	bp_c00, bp_c01, bp_c02, bp_c03 int64
-	bp_cp2, bp_cp3                 int64
-	bp_mr0, bp_mr1, bp_mr2         int64
+	bp_c0min                       int
+	bp_c00, bp_c01, bp_c02, bp_c03 int
+	bp_cp2, bp_cp3                 int
+	bp_mr0, bp_mr1, bp_mr2         int
 )
 
-func createBlueprint(i, c00, c01, c02, cp2, c03, cp3 int64) *Blueprint {
-	c0 := c00
-	if c01 < c0 {
-		c0 = c01
-	}
-	if c02 < c0 {
-		c0 = c02
-	}
-	if c03 < c0 {
-		c0 = c03
-	}
-	mr0 := c00
-	if c01 > mr0 {
-		mr0 = c01
-	}
-	if c02 > mr0 {
-		mr0 = c02
-	}
-	if c03 > mr0 {
-		mr0 = c03
-	}
+func createBlueprint(i, c00, c01, c02, cp2, c03, cp3 int) *Blueprint {
+	c0 := helpers.Min4(c00, c01, c02, c03)
+	mr0 := helpers.Max4(c00, c01, c02, c03)
 	mr1 := cp2
 	mr2 := cp3
 
@@ -69,19 +51,19 @@ func (bp *Blueprint) toGlobal() {
 }
 
 type State struct {
-	t              int64
-	i0, i1, i2, i3 int64
-	r0, r1, r2, r3 int64
+	t              int
+	i0, i1, i2, i3 int
+	r0, r1, r2, r3 int
 }
 
-func createState(timeLimit int64) State {
+func createState(timeLimit int) State {
 	s := State{0, 0, 0, 0, 0, 0, 0, 0, 0}
 	s.t = timeLimit
 	s.r0 += 1
 	return s
 }
 
-var best int64 = 0
+var best int = 0
 
 func compute(s State) {
 	if s.t == 0 {
@@ -175,11 +157,11 @@ func main() {
 	helpers.ReadStdin(func(line string) {
 		if match := reBlueprint.FindStringSubmatch(line); match != nil {
 			blueprint := createBlueprint(
-				helpers.MustParseInt64(match[1]),
-				helpers.MustParseInt64(match[2]),
-				helpers.MustParseInt64(match[3]),
-				helpers.MustParseInt64(match[4]), helpers.MustParseInt64(match[5]),
-				helpers.MustParseInt64(match[6]), helpers.MustParseInt64(match[7]),
+				helpers.MustParseInt(match[1]),
+				helpers.MustParseInt(match[2]),
+				helpers.MustParseInt(match[3]),
+				helpers.MustParseInt(match[4]), helpers.MustParseInt(match[5]),
+				helpers.MustParseInt(match[6]), helpers.MustParseInt(match[7]),
 			)
 			blueprints = append(blueprints, blueprint)
 		} else {
@@ -188,7 +170,7 @@ func main() {
 	})
 
 	if helpers.Part1() {
-		sum := int64(0)
+		sum := int(0)
 		for _, bp := range blueprints {
 			state := createState(24)
 			best = 0
@@ -199,7 +181,7 @@ func main() {
 		}
 		fmt.Println(sum)
 	} else {
-		m := int64(1)
+		m := int(1)
 		for i, bp := range blueprints {
 			if i >= 3 {
 				break

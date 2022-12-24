@@ -83,13 +83,6 @@ func parseList(s string) *List {
 	return root
 }
 
-func min(a, b int) int {
-	if a <= b {
-		return a
-	}
-	return b
-}
-
 const (
 	INORDER = iota
 	NOTINORDER
@@ -117,7 +110,7 @@ func inOrder(a, b *List) int {
 		// list & list
 		lenA := len(a.lists)
 		lenB := len(b.lists)
-		lens := min(len(a.lists), len(b.lists))
+		lens := helpers.Min(len(a.lists), len(b.lists))
 		for i := 0; i < lens; i += 1 {
 			res := inOrder(a.lists[i], b.lists[i])
 			if res != UNDECIDED {

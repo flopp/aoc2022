@@ -23,20 +23,6 @@ func (xy XY) offset(x, y int) XY {
 	return XY{xy.X + x, xy.Y + y}
 }
 
-func minInt(a, b int) int {
-	if a <= b {
-		return a
-	}
-	return b
-}
-
-func maxInt(a, b int) int {
-	if a >= b {
-		return a
-	}
-	return b
-}
-
 type Cave struct {
 	start XY
 	maxY  int
@@ -49,17 +35,17 @@ func createCave(start XY) *Cave {
 
 func (cave *Cave) addWall(a, b XY) {
 	if a.X == b.X {
-		to := maxInt(a.Y, b.Y)
-		for y := minInt(a.Y, b.Y); y <= to; y += 1 {
+		to := helpers.Max(a.Y, b.Y)
+		for y := helpers.Min(a.Y, b.Y); y <= to; y += 1 {
 			cave.grid[XY{a.X, y}] = '#'
 		}
-		cave.maxY = maxInt(cave.maxY, to)
+		cave.maxY = helpers.Max(cave.maxY, to)
 	} else {
-		to := maxInt(a.X, b.X)
-		for x := minInt(a.X, b.X); x <= to; x += 1 {
+		to := helpers.Max(a.X, b.X)
+		for x := helpers.Min(a.X, b.X); x <= to; x += 1 {
 			cave.grid[XY{x, a.Y}] = '#'
 		}
-		cave.maxY = maxInt(cave.maxY, a.Y)
+		cave.maxY = helpers.Max(cave.maxY, a.Y)
 	}
 }
 
